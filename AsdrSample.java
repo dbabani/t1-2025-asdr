@@ -2,7 +2,7 @@ import java.io.*;
 
 public class AsdrSample {
 
-   private static final int BASE_TOKEN_NUM = 301;
+   private static final int BASE_TOKEN_NUM = 300;
    
    public static final int IDENT = 301;
    public static final int NUM = 302;
@@ -15,6 +15,8 @@ public class AsdrSample {
    public static final int BOOLEAN = 309;
    public static final int VOID = 310;
    public static final int FI = 311;
+   public static final int RETURN = 312;
+   public static final int VIRGULA = 313;
 
    public static final String tokenList[] = {"IDENT", "NUM", "WHILE", "IF", "ELSE", "FUNC", "INT", "DOUBLE", "BOOLEAN", "VOID"};
    
@@ -68,9 +70,12 @@ public class AsdrSample {
 
    private void ListaIdent() {
        if (debug) System.out.println("ListaIdent: laToken = " + laToken);
-       verifica(IDENT);
-       if (laToken == ',') {
-           verifica(',');
+       if(laToken == IDENT){
+         verifica(IDENT);
+       }
+
+       if (laToken == VIRGULA) {
+           verifica(VIRGULA);
            ListaIdent();
        }
    }
@@ -113,15 +118,15 @@ public class AsdrSample {
        if (debug) System.out.println("paramList: laToken = " + laToken);
        Tipo();
        verifica(IDENT);
-       if (laToken == ',') {
-           verifica(',');
+       if (laToken == VIRGULA) {
+           verifica(VIRGULA);
            paramList();
        }
    }
 
    private void ListaCmd() {
        if (debug) System.out.println("ListaCmd: laToken = " + laToken);
-       if (laToken == '{' || laToken == WHILE || laToken == IDENT || laToken == IF) {
+       if (laToken == '{' || laToken == WHILE || laToken == IDENT || laToken == IF || laToken == RETURN) {
            Cmd();
            ListaCmd();
        }
@@ -156,6 +161,10 @@ public class AsdrSample {
            verifica(')');
            Cmd();
            RestoIf();
+       } else if (laToken == RETURN){
+         verifica(RETURN);
+         E();
+         verifica(';');
        }
    }
 
@@ -208,21 +217,27 @@ public class AsdrSample {
            yyerror("Token inesperado");
    }
 
+   /* metodo de acesso ao Scanner gerado pelo JFLEX */
    private int yylex() {
-       int retVal = -1;
-       try {
-           yylval = new ParserVal(0);
-           retVal = lexer.yylex();
-       } catch (IOException e) {
-           System.err.println("IO Error:" + e);
-       }
-       return retVal;
-   }
+      int retVal = -1;
+      try {
+          yylval = new ParserVal(0); //zera o valor do token
+          retVal = lexer.yylex(); //le a entrada do arquivo e retorna um token
+      } catch (IOException e) {
+          System.err.println("IO Error:" + e);
+         }
+      return retVal; //retorna o token para o Parser 
+  }
 
-   public void yyerror(String error) {
-       System.err.println("Erro: " + error);
-       System.exit(1);
-   }
+
+   /* metodo de manipulacao de erros de sintaxe */
+  public void yyerror (String error) {
+     System.err.println("Erro: " + error);
+     System.err.println("Entrada rejeitada");
+     System.out.println("\n\nFalhou!!!");
+     System.exit(1);
+  }
+
 
    public void setDebug(boolean trace) {
        debug = trace;

@@ -29,6 +29,10 @@ WHITE_SPACE_CHAR=[\n\r\ \t\b\012]
 "double"     { return AsdrSample.DOUBLE; }
 "boolean"    { return AsdrSample.BOOLEAN; }
 "void"       { return AsdrSample.VOID; }
+","          { return AsdrSample.VIRGULA; }
+"return"     { return AsdrSample.RETURN; }
+"function"   {return AsdrSample.FUNC; }
+
 
 [:jletter:][:jletterdigit:]* { return AsdrSample.IDENT; }  
 
