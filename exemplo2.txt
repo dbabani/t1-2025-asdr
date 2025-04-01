@@ -1,0 +1,19 @@
+$TRACE_ON
+    int a;
+
+    func int check(boolean x) {
+        double c;
+        boolean c;
+
+        c = a + b + c / y;
+        if (c) {
+            a = 1;
+        } else {
+            a = b;
+        }
+
+        while (c) {
+            a = 3;
+        }
+    }
+

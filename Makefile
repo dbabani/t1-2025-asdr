@@ -1,5 +1,4 @@
-#JFLEX  = jflex
-JFLEX  = java -jar jflex.jar
+JFLEX  = jflex
 JAVAC  = javac
 
 # targets:

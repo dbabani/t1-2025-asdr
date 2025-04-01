@@ -1,4 +1,8 @@
 $TRACE_ON
-    { a = ((( 34 )))  }
+    int a;
 
+    func VOID gabriel2() {
+        boolean c;
+        c = a + b + c / y;
+    }
 

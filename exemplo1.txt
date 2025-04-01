@@ -1,0 +1,13 @@
+$TRACE_ON
+    int a;
+
+    func int gabriel(boolean x) {
+        double c;
+        c = a + b + c / y;
+    }
+
+    func void gabriel2() {
+        boolean c;
+        c = a + b + c / y;
+    }
+

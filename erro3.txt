@@ -1,14 +1,11 @@
 $TRACE_ON
+    int a;
 
-    { while (b) 
+
+    func void gabriel() {
         if (c) {
-            {
-                while( true )
-                    if (a)  b=1; else b=7; fi
-            }
-        } 
-        else b = 42;
-        
+            int a;
+            a = 1;
+        }
     }
-
 

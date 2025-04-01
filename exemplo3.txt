@@ -1,0 +1,9 @@
+$TRACE_ON
+    int a;
+
+    func void loop() {
+        while (c) {
+            a = 3;
+        }
+    }
+

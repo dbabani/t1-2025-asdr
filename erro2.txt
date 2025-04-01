@@ -1,13 +1,8 @@
 $TRACE_ON
+    int a;
 
-    { while (b) 
-        if (c) {
-            {
-                while( true )
-                    if (a)  b=1; else b=7; 
-            }
-        } 
-        
+    func int boolean(boolean x) {
+        double c;
+        c = a + b + c / y;
     }
-
-
+    
